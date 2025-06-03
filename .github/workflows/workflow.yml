@@ -23,7 +23,7 @@ jobs:
             - name: Setuo Node.js environment
               uses: actions/setup-node@v4.4.0
               with: # i don't specify the versions so i can pass the variable to it 
-                node_version:${{matrix.node_version}} 
+                node-version:${{matrix.node_version}} 
             
             - name: install npm
               run: npm install    
