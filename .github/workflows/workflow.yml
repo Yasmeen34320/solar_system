@@ -29,7 +29,12 @@ jobs:
               run: npm install    
               
             - name: unit testing
-              run: npm test   # output--> test-result.xml
+              run: npm test   # output--> test-result.xml but on the vm need to be on my device (upload build-artifact)
+            
+            - uses: actions/upload-artifact@v4
+              with:
+                name: moch-test-result
+                path: test-results.xml # the file i know it will create it 
                 
 
 
