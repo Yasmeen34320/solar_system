@@ -20,7 +20,7 @@ jobs:
             - name: checkout repo  
               uses: actions/checkout@v4.2.2 # built-in actions for reading files in the folder as i run on different machine
            
-            - name: Setuo Node.js environment
+            - name: Setup Node.js environment
               uses: actions/setup-node@v4.4.0
               with: # i don't specify the versions so i can pass the variable to it 
                 node-version: ${{matrix.node_version}} 
@@ -33,8 +33,9 @@ jobs:
             
             - uses: actions/upload-artifact@v4
               with:
-                name: moch-test-result
-                path: test-results.xml # the file i know it will create it 
+                name: moch-test-result-${{ matrix.node_version }}-${{ matrix.operating_system }}
+                path: test-results.xml
+ # the file i know it will create it 
                 
 #####################
 
