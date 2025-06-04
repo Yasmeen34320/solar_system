@@ -29,12 +29,38 @@ jobs:
               run: npm install    
               
             - name: unit testing
+              id: test-npm  # id for this job 
               run: npm test   # output--> test-result.xml but on the vm need to be on my device (upload build-artifact)
             
             - uses: actions/upload-artifact@v4
+              if: steps.test-npm == 'failure' || steps.test-npm == 'success' # if true mean not stop if there is an error  # or without id ==> if: failure() || success()
               with:
                 name: moch-test-result-${{ matrix.node_version }}-${{ matrix.operating_system }}
                 path: test-results.xml
+
+    code-coverage:
+      name: My Code coverage
+      
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout/@v4.2.2
+        - name: Setup Node.js environment
+          uses: actions/setup-node@v4.4.0
+          with:
+            node-version: 20
+        - name: install npm
+          run: npm i
+
+        - name: run code coverage
+          run: npm run coverage
+
+        - uses: actions/upload-artifact@v4
+          if: failure() || success()
+          with:
+            name: code-coverage-result
+            path: coverage
+            retention-days: 5          
  # the file i know it will create it 
                 
 #####################
