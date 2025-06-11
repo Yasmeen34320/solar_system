@@ -4,3 +4,4 @@ COPY script.sh /APP/dir
 COPY . .                         
 RUN chmod +x /APP/dir/script.sh    
 CMD ["/APP/dir/script.sh"]
+
